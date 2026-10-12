@@ -9,6 +9,8 @@ import json
 import os
 from pathlib import Path
 import re
+import socket
+import ssl
 import sys
 from urllib.error import HTTPError, URLError
 from urllib.request import HTTPRedirectHandler, Request, build_opener
@@ -26,6 +28,28 @@ class BootstrapError(Exception):
 class NoRedirects(HTTPRedirectHandler):
     def redirect_request(self, request, fp, code, message, headers, new_url):
         raise BootstrapError("The GitVerse API redirected the request; credentials were not forwarded.")
+
+
+def connection_failure(error: BaseException) -> str:
+    """Report only a fixed category and numeric errno, never exception text."""
+    reason = error.reason if isinstance(error, URLError) else error
+    if isinstance(reason, socket.gaierror):
+        category = "DNS lookup failed"
+    elif isinstance(reason, ssl.SSLCertVerificationError):
+        category = "TLS certificate verification failed"
+    elif isinstance(reason, ssl.SSLError):
+        category = "TLS handshake failed"
+    elif isinstance(reason, TimeoutError):
+        category = "connection timed out"
+    elif isinstance(reason, ConnectionRefusedError):
+        category = "connection refused"
+    elif isinstance(reason, ConnectionResetError):
+        category = "connection reset"
+    else:
+        category = "network connection failed"
+    code = getattr(reason, "errno", None)
+    detail = f"; errno {code}" if isinstance(code, int) else ""
+    return f"GitVerse API is unavailable ({category}{detail}). Retry the workflow."
 
 
 def identifier(value: object) -> str:
@@ -67,8 +91,8 @@ def request_api(method: str, path: str, token: str, body: dict | None = None):
                 "GitVerse denied access (403). The token needs User Read and Repo Write permissions."
             ) from None
         raise BootstrapError(f"GitVerse API request failed (HTTP {error.code}); retry the workflow.") from None
-    except (URLError, TimeoutError, OSError):
-        raise BootstrapError("GitVerse API is unavailable. Check connectivity and retry the workflow.") from None
+    except (URLError, TimeoutError, OSError) as error:
+        raise BootstrapError(connection_failure(error)) from None
 
 
 def verify_repository(repository: object, login: str) -> None:
