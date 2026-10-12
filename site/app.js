@@ -20,10 +20,16 @@
   document.querySelectorAll('[data-value]').forEach(el => { if(c.prices?.[el.dataset.value]) el.textContent=c.prices[el.dataset.value]; });
   if (!c.reviewMode) $('review-bar').hidden=true;
   $('hide-review').addEventListener('click',()=>{$('review-bar').hidden=true;});
+  const header=document.querySelector('.header');
+  const syncHeaderHeight=()=>document.documentElement.style.setProperty('--header-height',header.getBoundingClientRect().height+'px');
+  syncHeaderHeight();
+  if ('ResizeObserver' in window) new ResizeObserver(syncHeaderHeight).observe(header);
+  else window.addEventListener('resize',syncHeaderHeight);
   const menu=document.querySelector('.menu-toggle');
-  menu.addEventListener('click',()=>{const expanded=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!expanded));$('navigation').classList.toggle('is-open',!expanded);});
-  $('navigation').querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{menu.setAttribute('aria-expanded','false');$('navigation').classList.remove('is-open');}));
-  document.addEventListener('keydown',e=>{if(e.key==='Escape' && menu.getAttribute('aria-expanded')==='true'){const inside=$('navigation').contains(document.activeElement);menu.setAttribute('aria-expanded','false');$('navigation').classList.remove('is-open');if(inside)menu.focus();}});
+  const closeMenu=()=>{menu.setAttribute('aria-expanded','false');$('navigation').classList.remove('is-open');syncHeaderHeight();};
+  menu.addEventListener('click',()=>{const expanded=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!expanded));$('navigation').classList.toggle('is-open',!expanded);syncHeaderHeight();});
+  $('navigation').querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape' && menu.getAttribute('aria-expanded')==='true'){const inside=$('navigation').contains(document.activeElement);closeMenu();if(inside)menu.focus();}});
   function loadPortrait(src, imageId, fallbackId){
     if(!src)return;
     const image=$(imageId);
