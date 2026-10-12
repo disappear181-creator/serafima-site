@@ -1,0 +1,36 @@
+name: Publish website to GitVerse
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'site/**'
+      - 'scripts/publish_gitverse.py'
+      - 'scripts/bootstrap_gitverse.py'
+      - '.github/workflows/publish-gitverse.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-gitverse
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out website
+        uses: actions/checkout@v5.1.0
+        with:
+          persist-credentials: false
+      - name: Prepare GitVerse repository
+        env:
+          GITVERSE_TOKEN: ${{ secrets.GITVERSE_TOKEN }}
+        run: python3 scripts/bootstrap_gitverse.py
+      - name: Publish static files
+        env:
+          GITVERSE_TOKEN: ${{ secrets.GITVERSE_TOKEN }}
+        run: python3 scripts/publish_gitverse.py
