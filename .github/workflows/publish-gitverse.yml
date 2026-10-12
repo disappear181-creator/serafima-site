@@ -7,6 +7,7 @@ on:
       - 'site/**'
       - 'scripts/publish_gitverse.py'
       - 'scripts/bootstrap_gitverse.py'
+      - 'scripts/check_gitverse_pages.py'
       - '.github/workflows/publish-gitverse.yml'
   workflow_dispatch:
 
@@ -34,3 +35,7 @@ jobs:
         env:
           GITVERSE_TOKEN: ${{ secrets.GITVERSE_TOKEN }}
         run: python3 scripts/publish_gitverse.py
+      - name: Verify public website
+        timeout-minutes: 2
+        continue-on-error: true
+        run: python3 scripts/check_gitverse_pages.py
