@@ -74,7 +74,11 @@ def main() -> int:
 
     # Pages builds are asynchronous. Bound retries; a failed check never reruns deployment.
     failure = ""
-    for attempt in range(3):
+    # Allow Pages to finish its asynchronous build (previously only 4 seconds).
+    deadline = time.monotonic() + 90
+    attempt = 0
+    while True:
+        attempt += 1
         try:
             verified = check_files(base, files)
             message = f"Verified {len(verified)} public files: HTTP 200 and SHA-256 match."
@@ -84,9 +88,11 @@ def main() -> int:
             return 0
         except VerificationError as error:
             failure = str(error)
-            print(f"Pages verification attempt {attempt + 1}/3: {failure}", file=sys.stderr)
-            if attempt < 2:
-                time.sleep(2)
+            print(f"Pages verification attempt {attempt}: {failure}", file=sys.stderr)
+            remaining = deadline - time.monotonic()
+            if remaining <= 0:
+                break
+            time.sleep(min(10, remaining))
     message = (
         f"Public website NOT verified. {failure} "
         "The file transfer may have succeeded separately. Check the GitVerse Pages build status "
