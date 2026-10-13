@@ -1,4 +1,4 @@
-:root{--paper:#fffaf2;--surface:#f3efe6;--ink:#3e4035;--muted:#5e5d50;--line:#dcd4c1;--olive:#818263;--sage:#c2c395;--blush:#ddbaae;--peach:#efd7cf;--photo:#ece6d9;--green:#5f624b;--green-hover:#4e513e;--header-height:100px;--radius:6px;--width:1240px}
+:root{--paper:#f7f4ed;--surface:#e5e1da;--ink:#3e4035;--muted:#5e5d50;--line:#dce0d1;--olive:#3e4035;--sage:#dce0d1;--blush:#e7c7b8;--peach:#eadcc6;--photo:#eadcc6;--green:#dce0d1;--green-hover:#eadcc6;--header-height:100px;--radius:6px;--width:1240px}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-height) + 24px)}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:"Manrope", "Avenir Next", "Segoe UI",Arial,sans-serif;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
@@ -10,8 +10,8 @@ a,button{touch-action:manipulation}
 button{cursor:pointer}
 button:disabled{cursor:wait}
 img{display:block;max-width:100%}
-button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--green);outline-offset:5px}
-a:hover{color:var(--green)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--ink);outline-offset:5px}
+a:hover{color:var(--ink)}
 p+p{margin-top:18px}
 h1,h2,h3{font-weight:400;letter-spacing:-.045em;line-height:1.12}
 h1{font-size:clamp(56px,6.5vw,92px)}
@@ -37,12 +37,14 @@ li::marker{color:var(--olive)}
 .nav-cta{border-bottom:1px solid var(--ink)}
 .nav-cta span{margin-left:25px}
 .menu-toggle{display:none}
-.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:70px;padding-top:51px;padding-bottom:85px;align-items:center}
+.hero{display:grid;grid-template-columns:1fr 1.05fr;gap:70px;padding-top:51px;padding-bottom:85px;align-items:center}
+.hero-copy{grid-column:2;grid-row:1}
+.hero-visual{grid-column:1;grid-row:1}
 .hero .eyebrow{margin-bottom:24px}
 .profession{font-size:22px;margin-top:18px;letter-spacing:-.02em}
 .hero-intro{max-width:475px;margin-top:30px;font-size:17px;color:var(--muted);line-height:1.8}
-.button{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;border:1px solid var(--green);border-radius:3px;background:var(--green);color:var(--paper);padding:17px 23px;font-size:14px;line-height:1.5;transition:background .2s,color .2s,transform .2s}
-.button:hover{background:var(--green-hover);color:var(--paper);transform:translateY(-1px)}
+.button{display:inline-flex;align-items:center;justify-content:space-between;gap:32px;border:1px solid var(--green);border-radius:3px;background:var(--green);color:var(--ink);padding:17px 23px;font-size:14px;line-height:1.5;transition:background .2s,color .2s,transform .2s}
+.button:hover{background:var(--green-hover);color:var(--ink);transform:translateY(-1px)}
 .hero .button{margin-top:33px}
 .hero-meta{display:flex;flex-wrap:wrap;gap:13px;font-size:11px;color:var(--muted);margin-top:24px}
 .hero-meta span+span:before{content:"/";margin-right:13px;color:var(--line)}
@@ -72,12 +74,12 @@ li::marker{color:var(--olive)}
 .prices-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .price-card{padding:38px 40px;background:var(--surface);border-radius:4px}
 .price-card-top{display:flex;justify-content:space-between;font-size:11px;text-transform:uppercase;letter-spacing:.1em}
-.price-card h3{margin-top:38px;font-size:32px;line-height:1.2}
+.service-icon{display:block;width:76px;height:76px;margin-top:30px;fill:none;stroke:var(--ink);stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
 .price{font-size:45px;line-height:1.2;letter-spacing:-.05em;margin-top:40px}
 .price small{font-size:22px;margin-left:8px;color:var(--muted)}
 .price-card>p:not(.price){font-size:12px;margin-top:13px;color:var(--muted)}
 .button-outline{background:transparent;color:var(--ink);border-color:var(--olive)}
-.button-outline:hover{background:var(--ink);color:var(--paper)}
+.button-outline:hover{background:var(--peach);color:var(--ink)}
 .first-meeting{display:grid;grid-template-columns:1fr 1.4fr;gap:65px;padding:47px 0 0;margin-top:20px}
 .first-meeting h3{font-size:28px}
 .first-meeting p{font-size:15px;color:var(--muted)}
@@ -113,22 +115,15 @@ li::marker{color:var(--olive)}
 .principle-list article>span{font-size:12px;color:var(--muted);padding-top:5px}
 .principle-list h3{font-size:23px;line-height:1.35}
 .principle-list p{font-size:14px;line-height:1.9;color:var(--muted)}
-.booking{display:grid;grid-template-columns:1fr 1fr;gap:95px;padding-top:125px;padding-bottom:125px}
+.booking{padding-top:110px;padding-bottom:110px}
 .booking h2{margin-top:21px}
-.booking-intro{font-size:16px;color:var(--muted);margin-top:25px;max-width:420px}
-.booking-direct{font-size:12px;color:var(--muted);margin-top:40px}
-.booking-direct a{margin-right:24px;border-bottom:1px solid var(--olive);display:inline-block;margin-top:11px;color:var(--green);font-size:14px}
-.booking-form-wrap{padding-top:12px}
-form label{display:block;font-size:12px;color:var(--muted);margin:0 0 12px}
-form input{display:block;width:100%;border:0;border-bottom:1px solid var(--olive);border-radius:0;background:transparent;font-size:21px;line-height:1.5;padding:10px 0 14px;color:var(--ink);margin-bottom:29px}
-form input::placeholder{color:var(--muted);font-size:18px}
-form .button{width:100%;margin-top:2px}
-.form-note{font-size:11px;line-height:1.8;color:var(--muted);margin-top:17px}
+.booking-intro{font-size:16px;color:var(--muted);margin-top:25px;max-width:700px}
+.booking-actions{display:flex;flex-wrap:wrap;gap:16px;margin-top:32px}
+.booking-actions .button{min-width:200px;min-height:56px}
 .privacy-link{display:inline-block;font-size:11px;margin-top:9px;text-decoration:underline;text-underline-offset:4px}
-#selected-format{font-size:12px;margin-bottom:18px;color:var(--green)}
-.footer{background:var(--line);padding-top:65px;padding-bottom:20px}
+.footer{background:var(--sage);padding-top:65px;padding-bottom:20px}
 .footer-main{display:grid;grid-template-columns:1.3fr 1fr;gap:75px;padding-bottom:52px}
-.footer h2{font-size:34px;margin-top:24px}
+.footer h2{font-size:34px;margin-top:0}
 .footer-main>div>p:not(.eyebrow){font-size:13px;color:var(--muted);margin-top:9px}
 .footer-main>div>p:last-child{margin-top:27px}
 .contact-list>a{display:block;font-size:16px;line-height:2.2}
@@ -141,15 +136,7 @@ form .button{width:100%;margin-top:2px}
 .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0)}
 dialog{border:0;border-radius:8px;padding:0;background:var(--paper);color:var(--ink);max-width:600px;width:calc(100% - 32px);max-height:90svh;box-shadow:0 25px 100px #3e403533}
 dialog::backdrop{background:#3e403580;backdrop-filter:blur(4px)}
-.dialog-inner{padding:40px}
 .dialog-close{position:absolute;right:13px;top:8px;background:transparent;border:0;font-size:30px;color:inherit;min-width:44px;min-height:44px}
-.dialog-inner h2{font-size:32px;margin-top:16px}
-.dialog-inner>p:not(.eyebrow){font-size:13px;margin-top:17px}
-.dialog-inner textarea{width:100%;margin-top:24px;padding:15px;border:1px solid var(--line);border-radius:3px;background:var(--surface);resize:vertical;font-size:14px;color:var(--ink)}
-.message-actions{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
-.message-actions .button{font-size:11px;padding:13px 16px;justify-content:center;gap:0}
-.message-actions .text-link{font-size:11px}
-#copy-status{min-height:20px;font-size:12px}
 #image-dialog{max-width:950px;background:var(--paper);padding:50px 20px 20px}
 #document-full{max-height:78svh;object-fit:contain;width:100%}
 [hidden]{display:none!important}
@@ -186,7 +173,6 @@ dialog::backdrop{background:#3e403580;backdrop-filter:blur(4px)}
 .request h3{font-size:21px}
 .request ul,.request p{font-size:13px}
 .about-grid{gap:50px}
-.booking{gap:50px}
 }
 @media(max-width:800px){.approach-grid{grid-template-columns:1fr;gap:36px}
 .header nav.is-open{max-height:60svh;overflow-y:auto}
@@ -212,7 +198,6 @@ dialog::backdrop{background:#3e403580;backdrop-filter:blur(4px)}
 .quote-mark{font-size:90px}
 .no-request .circle-link{display:none}
 .price-card{padding:28px}
-.price-card h3{font-size:26px}
 .price{font-size:38px}
 .first-meeting{gap:35px}
 .about-grid{grid-template-columns:.8fr 1.2fr;gap:35px}
@@ -229,7 +214,6 @@ dialog::backdrop{background:#3e403580;backdrop-filter:blur(4px)}
 .principle-list article{grid-template-columns:35px 1fr 1.25fr;gap:20px}
 .principle-list h3{font-size:21px}
 .principle-list p{font-size:13px}
-.booking{gap:35px}
 .booking-intro{font-size:14px}
 .footer-main{gap:40px}
 .footer h2{font-size:29px}
@@ -278,7 +262,6 @@ h2{font-size:36px;line-height:1.13}
 .format-facts>div{margin-bottom:18px;padding-bottom:18px}
 .prices-grid{grid-template-columns:1fr;gap:17px}
 .price-card{padding:28px}
-.price-card h3{font-size:29px;margin-top:28px}
 .price{font-size:44px;margin-top:30px}
 .first-meeting{display:block;margin-top:12px;padding-top:27px}
 .first-meeting h3{font-size:26px;margin-bottom:21px}
@@ -304,13 +287,11 @@ h2{font-size:36px;line-height:1.13}
 .principle-list h3 br{display:none}
 .principle-list article>p,.principle-list article>div{grid-column:2}
 .principle-list p{font-size:14px}
-.booking{grid-template-columns:1fr;gap:35px;padding-top:65px;padding-bottom:70px}
-.booking-direct{margin-top:26px}
+.booking{padding-top:65px;padding-bottom:70px}
+.booking-actions{flex-direction:column;align-items:stretch}
+.booking-actions .button{width:100%}
 .booking h2{font-size:39px}
 .booking-intro{font-size:15px}
-.booking-form-wrap{padding:0}
-form input{font-size:18px}
-form input::placeholder{font-size:16px}
 .footer{padding-top:45px}
 .footer-main{grid-template-columns:1fr;gap:30px;padding-bottom:35px}
 .footer h2{font-size:31px}
@@ -318,11 +299,6 @@ form input::placeholder{font-size:16px}
 .contact-list>a{font-size:16px}
 .footer-bottom{flex-wrap:wrap;font-size:9px;gap:14px 25px}
 .footer-bottom span{flex:1 0 100%}
-.dialog-inner{padding:30px 23px}
-.dialog-inner h2{font-size:29px}
-.message-actions{grid-template-columns:1fr}
-.message-actions .button{font-size:12px}
-.message-actions .text-link{font-size:12px}
 .policy{padding:35px 24px 60px}
 .policy h1{font-size:35px}
 .policy p,.policy li{font-size:14px}
@@ -333,7 +309,7 @@ form input::placeholder{font-size:16px}
 @media print{.header{position:static}
 .review-bar,.menu-toggle,.header nav,.hero-visual,.about-visual,.booking,dialog{display:none}
 .section{padding-block:35px}
-body{font-size:12px;background:white}
+body{font-size:12px;background:var(--paper)}
 h1{font-size:48px}
 h2{font-size:30px}
 .wrap{padding-inline:20px}
@@ -341,4 +317,3 @@ h2{font-size:30px}
 .button{display:none}
 .request,.price-card,.principle-list article{break-inside:avoid}
 }
-

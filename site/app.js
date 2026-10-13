@@ -1,7 +1,6 @@
 'use strict';
 (() => {
   const c = window.SITE_CONFIG || {};
-  let selectedFormat = '';
   const $ = id => document.getElementById(id);
   const safeUrl = (value, fallback) => {
     try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) ? u.href : fallback; } catch { return fallback; }
@@ -49,27 +48,6 @@
       $('certificate-grid').append(button);
     });
   } else if(!c.reviewMode) { $('certificates').hidden=true; }
-  document.querySelectorAll('[data-format]').forEach(a=>a.addEventListener('click',()=>{
-    selectedFormat=a.dataset.format;$('selected-format').textContent='Выбран формат: '+selectedFormat+'.';$('selected-format').hidden=false;
-  }));
-  $('booking-form').addEventListener('submit',e=>{
-    e.preventDefault();
-    const name=$('client-name').value.trim();const contact=$('client-contact').value.trim();
-    $('client-name').setCustomValidity(name.length<2?'Укажите, как к вам обращаться.':'');
-    $('client-contact').setCustomValidity(contact.length<3?'Укажите Telegram или номер телефона.':'');
-    if(!$('booking-form').reportValidity())return;
-    const text=`Здравствуйте, Серафима! Хочу записаться на консультацию${selectedFormat?' ('+selectedFormat+')':''}.\nМеня зовут ${name}.\nУдобный способ связи: ${contact}.\nПодскажите, пожалуйста, свободное время.`;
-    $('message-preview').value=text;
-    const wa=new URL(whatsapp);wa.searchParams.set('text',text);$('message-whatsapp').href=wa.href;
-    $('message-email').href='mailto:'+email+'?subject='+encodeURIComponent('Запись на консультацию')+'&body='+encodeURIComponent(text);
-    $('message-telegram').href=telegram;$('copy-status').textContent='';$('message-dialog').showModal();
-  });
-  $('booking-submit').disabled=false;
-  ['client-name','client-contact'].forEach(id=>$(id).addEventListener('input',()=>$(id).setCustomValidity('')));
-  $('copy-message').addEventListener('click',async()=>{
-    try{await navigator.clipboard.writeText($('message-preview').value);$('copy-status').textContent='Текст скопирован. Вставьте его в чат и отправьте.';}
-    catch{$('message-preview').focus();$('message-preview').select();$('copy-status').textContent='Выделили текст: скопируйте его вручную и вставьте в чат.';}
-  });
   document.querySelectorAll('dialog').forEach(dialog=>{
     dialog.querySelector('[data-close]').addEventListener('click',()=>dialog.close());
     dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
