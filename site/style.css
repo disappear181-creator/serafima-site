@@ -361,7 +361,7 @@ h2{font-size:36px;line-height:1.13}
 }
 @media(max-width:360px){.principle-list h3{font-size:20px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}
-*{transition:none!important}
+*,*::before,*::after{transition:none!important}
 }
 @media print{.carousel-track{display:block;transform:none!important}
 .certificate-slide{display:block!important;break-inside:avoid}
