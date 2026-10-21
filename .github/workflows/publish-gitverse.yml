@@ -21,7 +21,7 @@ concurrency:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20
     steps:
       - name: Check out website
         uses: actions/checkout@v5.1.0
@@ -36,5 +36,5 @@ jobs:
           GITVERSE_TOKEN: ${{ secrets.GITVERSE_TOKEN }}
         run: python3 scripts/publish_gitverse.py
       - name: Verify public website
-        timeout-minutes: 3
+        timeout-minutes: 16
         run: python3 scripts/check_gitverse_pages.py

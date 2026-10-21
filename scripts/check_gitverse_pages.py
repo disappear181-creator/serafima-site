@@ -74,8 +74,8 @@ def main() -> int:
 
     # Pages builds are asynchronous. Bound retries; a failed check never reruns deployment.
     failure = ""
-    # Allow Pages to finish its asynchronous build (previously only 4 seconds).
-    deadline = time.monotonic() + 90
+    # GitVerse cloud runners can queue for several minutes before the Pages build starts.
+    deadline = time.monotonic() + 15 * 60
     attempt = 0
     while True:
         attempt += 1
