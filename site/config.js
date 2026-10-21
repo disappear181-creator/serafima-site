@@ -1,6 +1,6 @@
 // editor-access-check: Serafima
 /* Единственное место настройки контактов, цен и новых фотографий.
-   Файлы фотографий и дипломов размещайте в dist/assets/.
+   Файлы фотографий и дипломов размещайте в site/assets/.
    Порядок элементов certificates — порядок документов на странице. */
 window.SITE_CONFIG = {
   reviewMode: true,
@@ -11,8 +11,12 @@ window.SITE_CONFIG = {
   phoneDisplay: '+7 921 377-40-41',
   email: 'dem.serafima@yandex.com',
   instagram: 'https://www.instagram.com/sdjomina/',
-  heroPhoto: '',
-  aboutPhoto: '',
-  certificates: []
-  // Пример: [{src:'assets/diploma-01.jpg', alt:'Диплом НИУ ВШЭ, 2024'}]
+  heroPhoto: 'assets/serafima-hero.jpg',
+  aboutPhoto: 'assets/serafima-about.jpg',
+  certificates: [
+    {src: 'assets/diploma-01.jpg', alt: 'Диплом магистра психологии — НИУ ВШЭ, 2024'},
+    {src: 'assets/diploma-02.jpg', alt: 'Сертификат GLE International, 2024'},
+    {src: 'assets/diploma-03.jpg', alt: 'Основы психиатрии для психологов — МГУ, 2024'},
+    {src: 'assets/diploma-04.jpg', alt: 'Клиническая психология — МИП, 2026'}
+  ]
 };
