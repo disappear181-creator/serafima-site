@@ -29,6 +29,21 @@
   menu.addEventListener('click',()=>{const expanded=menu.getAttribute('aria-expanded')==='true';menu.setAttribute('aria-expanded',String(!expanded));$('navigation').classList.toggle('is-open',!expanded);syncHeaderHeight();});
   $('navigation').querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
   document.addEventListener('keydown',e=>{if(e.key==='Escape' && menu.getAttribute('aria-expanded')==='true'){const inside=$('navigation').contains(document.activeElement);closeMenu();if(inside)menu.focus();}});
+  // A native button supplies Enter/Space activation and keyboard focus.
+  const requestToggles = [...document.querySelectorAll('.request-toggle')];
+  const setRequestExpanded = (button, expanded) => {
+    const panel = $(button.getAttribute('aria-controls'));
+    button.setAttribute('aria-expanded', String(expanded));
+    panel.inert = !expanded;
+    panel.classList.toggle('is-open', expanded);
+  };
+  requestToggles.forEach(button => {
+    setRequestExpanded(button, false);
+    button.addEventListener('click', () => {
+      const expanded = button.getAttribute('aria-expanded') !== 'true';
+      requestToggles.forEach(other => setRequestExpanded(other, other === button && expanded));
+    });
+  });
   function loadPortrait(src, imageId, fallbackId){
     if(!src)return;
     const image=$(imageId);
