@@ -30,18 +30,20 @@
   $('navigation').querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
   document.addEventListener('keydown',e=>{if(e.key==='Escape' && menu.getAttribute('aria-expanded')==='true'){const inside=$('navigation').contains(document.activeElement);closeMenu();if(inside)menu.focus();}});
   // A native button supplies Enter/Space activation and keyboard focus.
-  const requestToggles = [...document.querySelectorAll('.request-toggle')];
-  const setRequestExpanded = (button, expanded) => {
+  const setAccordionExpanded = (button, expanded) => {
     const panel = $(button.getAttribute('aria-controls'));
     button.setAttribute('aria-expanded', String(expanded));
     panel.inert = !expanded;
     panel.classList.toggle('is-open', expanded);
   };
-  requestToggles.forEach(button => {
-    setRequestExpanded(button, false);
-    button.addEventListener('click', () => {
-      const expanded = button.getAttribute('aria-expanded') !== 'true';
-      requestToggles.forEach(other => setRequestExpanded(other, other === button && expanded));
+  ['.request-toggle', '.principle-toggle'].forEach(selector => {
+    const toggles = [...document.querySelectorAll(selector)];
+    toggles.forEach(button => {
+      setAccordionExpanded(button, false);
+      button.addEventListener('click', () => {
+        const expanded = button.getAttribute('aria-expanded') !== 'true';
+        toggles.forEach(other => setAccordionExpanded(other, other === button && expanded));
+      });
     });
   });
   function loadPortrait(src, imageId, fallbackId){
@@ -52,19 +54,4 @@
     image.src=src;
   }
   loadPortrait(c.heroPhoto,'hero-photo','hero-fallback');loadPortrait(c.aboutPhoto,'about-photo','about-fallback');
-  const certificates=Array.isArray(c.certificates)?c.certificates.filter(x=>x&&typeof x.src==='string'&&x.src):[];
-  if(certificates.length){
-    $('certificate-grid').replaceChildren();$('cert-note').textContent='Нажмите на документ, чтобы рассмотреть его.';
-    certificates.forEach((item,index)=>{
-      const button=document.createElement('button');button.type='button';button.className='certificate-button';
-      const img=document.createElement('img');img.src=item.src;img.alt=item.alt||`Документ ${index+1}`;img.loading='lazy';
-      const caption=document.createElement('span');caption.textContent=img.alt;button.append(img,caption);
-      button.addEventListener('click',()=>{$('document-full').src=item.src;$('document-full').alt=img.alt;$('image-dialog').showModal();});
-      $('certificate-grid').append(button);
-    });
-  } else if(!c.reviewMode) { $('certificates').hidden=true; }
-  document.querySelectorAll('dialog').forEach(dialog=>{
-    dialog.querySelector('[data-close]').addEventListener('click',()=>dialog.close());
-    dialog.addEventListener('click',e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close();}});
-  });
 })();

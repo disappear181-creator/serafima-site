@@ -14,9 +14,9 @@ window.SITE_CONFIG = {
   heroPhoto: 'assets/serafima-hero.jpg',
   aboutPhoto: 'assets/serafima-about.jpg',
   certificates: [
-    {src: 'assets/diploma-01.jpg', alt: 'Диплом магистра психологии — НИУ ВШЭ, 2024'},
-    {src: 'assets/diploma-02.jpg', alt: 'Сертификат GLE International, 2024'},
-    {src: 'assets/diploma-03.jpg', alt: 'Основы психиатрии для психологов — МГУ, 2024'},
-    {src: 'assets/diploma-04.jpg', alt: 'Клиническая психология — МИП, 2026'}
+    {src: 'assets/diploma-01.jpg', previewSrcset: 'assets/diploma-01-480.webp 480w, assets/diploma-01-960.webp 960w', width: 1447, height: 1029, alt: 'Диплом магистра психологии — НИУ ВШЭ, 2024'},
+    {src: 'assets/diploma-02.jpg', previewSrcset: 'assets/diploma-02-480.webp 480w, assets/diploma-02-960.webp 960w', width: 1054, height: 1492, alt: 'Сертификат GLE International, 2024'},
+    {src: 'assets/diploma-03.jpg', previewSrcset: 'assets/diploma-03-480.webp 480w, assets/diploma-03-960.webp 960w', width: 1403, height: 998, alt: 'Основы психиатрии для психологов — МГУ, 2024'},
+    {src: 'assets/diploma-04.jpg', previewSrcset: 'assets/diploma-04-480.webp 480w, assets/diploma-04-960.webp 960w', width: 1534, height: 1079, alt: 'Клиническая психология — МИП, 2026'}
   ]
 };
