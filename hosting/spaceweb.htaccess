@@ -1,0 +1,12 @@
+# SpaceWeb only. Apply after a valid certificate covers the domain and www.
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.serafima-demina\.com$ [NC]
+RewriteRule ^ https://serafima-demina.com%{REQUEST_URI} [R=301,L,NE]
+
+RewriteCond %{HTTP_HOST} ^serafima-demina\.com$ [NC]
+RewriteCond %{HTTPS} !=on
+RewriteCond %{HTTP:X-Forwarded-Proto} !^https$ [NC]
+RewriteCond %{HTTP:HTTPS} !=on [NC]
+RewriteRule ^ https://serafima-demina.com%{REQUEST_URI} [R=301,L,NE]
+</IfModule>

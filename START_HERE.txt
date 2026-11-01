@@ -2,9 +2,16 @@
 Проверено по актуальной документации 12 октября 2026.
 
 ТЕКУЩАЯ СХЕМА
+Собственный домен: serafima-demina.com (регистрация REG.RU).
+Дополнительная копия сайта: бесплатный SpaceWeb.
+SpaceWeb получает site/ из публичного main каждые 10 минут через Cron
+и python3.11. Служебный скрипт находится вне папки сайта.
+Инструкция для агента и восстановление: hosting/README.md.
+Завершение переноса подтверждается проверкой HTTPS, а не заявкой SSL.
+GitVerse и его публикация сохранены как резерв.
 Исходники: https://github.com/disappear181-creator/serafima-site
 Владелец GitHub: Антон (disappear181-creator).
-Хостинг: https://gitverse.ru/serafima-demina/serafima-demina
+Резервный хостинг: https://gitverse.ru/serafima-demina/serafima-demina
 Владелец GitVerse: Серафима.
 Сайт: https://serafima-demina.gitverse.site/
 Изменение main запускает уже настроенную публикацию в GitVerse.
