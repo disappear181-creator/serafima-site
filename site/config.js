@@ -3,7 +3,7 @@
    Файлы фотографий и дипломов размещайте в site/assets/.
    Порядок элементов certificates — порядок документов на странице. */
 window.SITE_CONFIG = {
-  reviewMode: true,
+  reviewMode: false,
   prices: {onlineRub: '4 000 ₽', onlineEur: '40 €', offlineRub: '4 600 ₽'},
   telegram: 'https://t.me/Serafima99',
   whatsapp: 'https://wa.me/79213774041',

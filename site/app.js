@@ -17,8 +17,6 @@
     if (a.dataset.contact === 'instagram') a.textContent = 'Instagram · @'+new URL(contacts.instagram).pathname.split('/').filter(Boolean).join('/')+' ↗';
   });
   document.querySelectorAll('[data-value]').forEach(el => { if(c.prices?.[el.dataset.value]) el.textContent=c.prices[el.dataset.value]; });
-  if (!c.reviewMode) $('review-bar').hidden=true;
-  $('hide-review').addEventListener('click',()=>{$('review-bar').hidden=true;});
   const header=document.querySelector('.header');
   const syncHeaderHeight=()=>document.documentElement.style.setProperty('--header-height',header.getBoundingClientRect().height+'px');
   syncHeaderHeight();
